@@ -17,7 +17,6 @@ struct ExploreView: View {
                     ForEach(bookVM.filteredBooks) { book in
                         NavigationLink(destination: BookDetailView(book: book).environmentObject(bookVM)) {
                             HStack(spacing: 14) {
-                                // Book Icon
                                 RoundedRectangle(cornerRadius: 12)
                                     .fill(Color(.systemGray6))
                                     .frame(width: 56, height: 56)
@@ -27,7 +26,6 @@ struct ExploreView: View {
                                             .foregroundColor(.black)
                                     )
                                 
-                                // Book Info
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(book.title)
                                         .font(.subheadline)

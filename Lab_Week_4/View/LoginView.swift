@@ -19,7 +19,6 @@ struct LoginView: View {
             VStack(spacing: 20) {
                 Spacer()
                 
-                // App Icon
                 Image(systemName: "doc.text")
                     .font(.system(size: 50))
                     .foregroundColor(.black)
@@ -31,7 +30,6 @@ struct LoginView: View {
                 Spacer()
                     .frame(height: 20)
                 
-                // Username Field
                 TextField("Username", text: $username)
                     .padding()
                     .background(Color(.systemGray6))
@@ -39,13 +37,11 @@ struct LoginView: View {
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                 
-                // Password Field
                 SecureField("Password", text: $password)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(10)
                 
-                // Sign In Button
                 Button(action: {
                     authVM.login(username: username, password: password)
                 }) {
@@ -60,7 +56,6 @@ struct LoginView: View {
                 
                 Spacer()
                 
-                // Navigate to Register
                 HStack(spacing: 4) {
                     Text("Don't have an account?")
                         .foregroundColor(.gray)

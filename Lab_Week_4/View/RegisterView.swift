@@ -19,7 +19,6 @@ struct RegisterView: View {
         VStack(spacing: 20) {
             Spacer()
             
-            // App Icon
             Image(systemName: "doc.text")
                 .font(.system(size: 50))
                 .foregroundColor(.black)
@@ -31,7 +30,6 @@ struct RegisterView: View {
             Spacer()
                 .frame(height: 20)
             
-            // Full Name Field
             TextField("Full Name", text: $fullName)
                 .padding()
                 .background(Color(.systemGray6))
@@ -39,7 +37,6 @@ struct RegisterView: View {
                 .autocapitalization(.words)
                 .disableAutocorrection(true)
             
-            // Email Field
             TextField("Email", text: $email)
                 .padding()
                 .background(Color(.systemGray6))
@@ -48,13 +45,11 @@ struct RegisterView: View {
                 .disableAutocorrection(true)
                 .keyboardType(.emailAddress)
             
-            // Password Field
             SecureField("Password", text: $password)
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(10)
             
-            // Register Button
             Button(action: {
                 authVM.register(fullName: fullName, email: email, password: password)
             }) {
@@ -69,7 +64,6 @@ struct RegisterView: View {
             
             Spacer()
             
-            // Navigate to Login
             HStack(spacing: 4) {
                 Text("Already have an account?")
                     .foregroundColor(.gray)

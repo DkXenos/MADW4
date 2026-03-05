@@ -17,7 +17,6 @@ struct ProfileView: View {
                 Spacer()
                     .frame(height: 20)
                 
-                // Profile Avatar Circle
                 Circle()
                     .fill(Color(.systemGray5))
                     .frame(width: 100, height: 100)
@@ -27,17 +26,14 @@ struct ProfileView: View {
                             .foregroundColor(.gray)
                     )
                 
-                // User Name
                 Text(authVM.fullName.isEmpty ? "John Doe" : authVM.fullName)
                     .font(.title2)
                     .fontWeight(.bold)
                 
-                // User Email
                 Text(authVM.email.isEmpty ? "john.doe@example.com" : authVM.email)
                     .font(.subheadline)
                     .foregroundColor(.gray)
                 
-                // Bio Description
                 Text("Avid reader, tech enthusiast, and minimalist.")
                     .font(.body)
                     .foregroundColor(.gray)
@@ -46,7 +42,6 @@ struct ProfileView: View {
                 
                 Spacer()
                 
-                // Sign Out Button
                 Button(action: {
                     authVM.logout()
                 }) {

@@ -14,7 +14,6 @@ struct SavedBooksView: View {
         NavigationStack {
             Group {
                 if bookVM.savedBooks.isEmpty {
-                    // Empty State
                     VStack(spacing: 16) {
                         Spacer()
                         
@@ -30,13 +29,11 @@ struct SavedBooksView: View {
                     }
                     .frame(maxWidth: .infinity)
                 } else {
-                    // Saved Books List
                     ScrollView {
                         LazyVStack(spacing: 12) {
                             ForEach(bookVM.savedBooks) { book in
                                 NavigationLink(destination: BookDetailView(book: book).environmentObject(bookVM)) {
                                     HStack(spacing: 14) {
-                                        // Book Icon
                                         RoundedRectangle(cornerRadius: 12)
                                             .fill(Color(.systemGray6))
                                             .frame(width: 56, height: 56)
@@ -46,7 +43,6 @@ struct SavedBooksView: View {
                                                     .foregroundColor(.black)
                                             )
                                         
-                                        // Book Info
                                         VStack(alignment: .leading, spacing: 4) {
                                             Text(book.title)
                                                 .font(.subheadline)
@@ -62,7 +58,6 @@ struct SavedBooksView: View {
                                         
                                         Spacer()
                                         
-                                        // Delete Button
                                         Button(action: {
                                             bookVM.removeSaved(for: book)
                                         }) {

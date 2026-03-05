@@ -18,7 +18,6 @@ struct BookDetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                // Large Book Cover
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color(.systemGray6))
                     .frame(width: 220, height: 300)
@@ -29,19 +28,16 @@ struct BookDetailView: View {
                     )
                     .padding(.top, 30)
                 
-                // Book Title
                 Text(book.title)
                     .font(.title2)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
-                // Book Author
                 Text(book.author)
                     .font(.subheadline)
                     .foregroundColor(.gray)
                 
-                // Pages
                 HStack(spacing: 4) {
                     Image(systemName: "doc.text")
                         .font(.caption)
@@ -51,7 +47,6 @@ struct BookDetailView: View {
                         .foregroundColor(.gray)
                 }
                 
-                // Save / Unsave Button
                 Button(action: {
                     bookVM.toggleSave(for: book)
                 }) {
@@ -69,7 +64,6 @@ struct BookDetailView: View {
                 .padding(.horizontal, 24)
                 .padding(.top, 8)
                 
-                // Synopsis
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Synopsis")
                         .font(.headline)

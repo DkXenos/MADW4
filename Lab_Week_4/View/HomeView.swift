@@ -15,7 +15,6 @@ struct HomeView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    // Welcome Header
                     Text("Welcome back, \(authVM.username.isEmpty ? "User" : authVM.username)")
                         .font(.subheadline)
                         .foregroundColor(.gray)
@@ -25,7 +24,6 @@ struct HomeView: View {
                         .fontWeight(.bold)
                     
                     if bookVM.savedBooks.isEmpty {
-                        // Empty State
                         VStack(spacing: 16) {
                             Spacer()
                                 .frame(height: 80)
@@ -52,7 +50,6 @@ struct HomeView: View {
                         }
                         .frame(maxWidth: .infinity)
                     } else {
-                        // Recently Saved Section
                         HStack {
                             Text("Recently Saved")
                                 .font(.headline)
@@ -63,13 +60,11 @@ struct HomeView: View {
                                 .foregroundColor(.gray)
                         }
                         
-                        // Horizontal scroll of saved books
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 16) {
                                 ForEach(bookVM.savedBooks.prefix(5)) { book in
                                     NavigationLink(destination: BookDetailView(book: book).environmentObject(bookVM)) {
                                         VStack(alignment: .leading, spacing: 8) {
-                                            // Book Card
                                             RoundedRectangle(cornerRadius: 12)
                                                 .fill(Color(.systemGray6))
                                                 .frame(width: 120, height: 160)
@@ -96,7 +91,6 @@ struct HomeView: View {
                             }
                         }
                         
-                        // View All Saved Button
                         NavigationLink(destination: SavedBooksView().environmentObject(bookVM)) {
                             Text("View All Saved")
                                 .fontWeight(.semibold)
