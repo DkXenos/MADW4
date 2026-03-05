@@ -13,71 +13,54 @@ struct ProfileView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 24) {
+            VStack(spacing: 20) {
                 Spacer()
                     .frame(height: 20)
                 
-                // Profile Avatar
-                Image(systemName: "person.circle.fill")
-                    .font(.system(size: 80))
+                // Profile Avatar Circle
+                Circle()
+                    .fill(Color(.systemGray5))
+                    .frame(width: 100, height: 100)
+                    .overlay(
+                        Image(systemName: "person")
+                            .font(.system(size: 40))
+                            .foregroundColor(.gray)
+                    )
+                
+                // User Name
+                Text(authVM.fullName.isEmpty ? "John Doe" : authVM.fullName)
+                    .font(.title2)
+                    .fontWeight(.bold)
+                
+                // User Email
+                Text(authVM.email.isEmpty ? "john.doe@example.com" : authVM.email)
+                    .font(.subheadline)
                     .foregroundColor(.gray)
                 
-                // User Info
-                VStack(spacing: 6) {
-                    Text(authVM.fullName.isEmpty ? "User" : authVM.fullName)
-                        .font(.title2)
-                        .fontWeight(.bold)
-                    
-                    Text(authVM.email.isEmpty ? authVM.username : authVM.email)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                }
-                
-                // Stats
-                HStack(spacing: 40) {
-                    VStack(spacing: 4) {
-                        Text("\(bookVM.savedBooks.count)")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                        Text("Saved")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                    }
-                    
-                    VStack(spacing: 4) {
-                        Text("\(bookVM.books.count)")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                        Text("Available")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                    }
-                }
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(12)
+                // Bio Description
+                Text("Avid reader, tech enthusiast, and minimalist.")
+                    .font(.body)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
                 
                 Spacer()
                 
-                // Logout Button
+                // Sign Out Button
                 Button(action: {
                     authVM.logout()
                 }) {
-                    HStack {
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
-                        Text("Log Out")
-                    }
-                    .fontWeight(.semibold)
-                    .foregroundColor(.red)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.red.opacity(0.1))
-                    .cornerRadius(10)
+                    Text("Sign Out")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.red)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.red.opacity(0.08))
+                        .cornerRadius(12)
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 20)
+                .padding(.horizontal, 24)
+                .padding(.bottom, 30)
             }
-            .padding(.horizontal)
             .navigationTitle("Profile")
         }
     }

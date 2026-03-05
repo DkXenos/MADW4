@@ -13,5 +13,6 @@ struct Book: Identifiable, Hashable {
     let author: String
     let icon: String
     let description: String
+    let pages: Int
     var isSaved: Bool = false
 }

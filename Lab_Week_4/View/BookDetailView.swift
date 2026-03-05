@@ -17,17 +17,17 @@ struct BookDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
-                // Book Cover
-                RoundedRectangle(cornerRadius: 16)
+            VStack(spacing: 16) {
+                // Large Book Cover
+                RoundedRectangle(cornerRadius: 20)
                     .fill(Color(.systemGray6))
-                    .frame(width: 180, height: 240)
+                    .frame(width: 220, height: 300)
                     .overlay(
                         Image(systemName: book.icon)
-                            .font(.system(size: 60))
+                            .font(.system(size: 80))
                             .foregroundColor(.black)
                     )
-                    .padding(.top, 20)
+                    .padding(.top, 30)
                 
                 // Book Title
                 Text(book.title)
@@ -41,26 +41,37 @@ struct BookDetailView: View {
                     .font(.subheadline)
                     .foregroundColor(.gray)
                 
+                // Pages
+                HStack(spacing: 4) {
+                    Image(systemName: "doc.text")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                    Text("\(book.pages) pages")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+                
                 // Save / Unsave Button
                 Button(action: {
                     bookVM.toggleSave(for: book)
                 }) {
-                    HStack {
+                    HStack(spacing: 8) {
                         Image(systemName: isSaved ? "bookmark.fill" : "bookmark")
-                        Text(isSaved ? "Saved" : "Save Book")
+                        Text(isSaved ? "Saved" : "Save")
                     }
                     .fontWeight(.semibold)
-                    .foregroundColor(isSaved ? .white : .black)
+                    .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(isSaved ? Color.black : Color(.systemGray6))
-                    .cornerRadius(10)
+                    .background(Color.black)
+                    .cornerRadius(12)
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 24)
+                .padding(.top, 8)
                 
-                // Description
+                // Synopsis
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Description")
+                    Text("Synopsis")
                         .font(.headline)
                         .fontWeight(.bold)
                     
@@ -69,13 +80,14 @@ struct BookDetailView: View {
                         .foregroundColor(.secondary)
                         .lineSpacing(4)
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 24)
+                .padding(.top, 8)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Spacer()
+                    .frame(height: 40)
             }
         }
-        .navigationTitle("Book Details")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -86,7 +98,8 @@ struct BookDetailView: View {
             title: "The Swift Programming Language",
             author: "Apple",
             icon: "swift",
-            description: "The authoritative reference for Swift."
+            description: "The official guide to Swift. A must-read for iOS developers.",
+            pages: 1000
         ))
         .environmentObject(BookViewModel())
     }

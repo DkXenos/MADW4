@@ -31,52 +31,59 @@ struct SavedBooksView: View {
                     .frame(maxWidth: .infinity)
                 } else {
                     // Saved Books List
-                    List {
-                        ForEach(bookVM.savedBooks) { book in
-                            NavigationLink(destination: BookDetailView(book: book).environmentObject(bookVM)) {
-                                HStack(spacing: 14) {
-                                    // Book Icon
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .fill(Color(.systemGray6))
-                                        .frame(width: 50, height: 50)
-                                        .overlay(
-                                            Image(systemName: book.icon)
-                                                .font(.title3)
-                                                .foregroundColor(.black)
-                                        )
-                                    
-                                    // Book Info
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text(book.title)
-                                            .font(.subheadline)
-                                            .fontWeight(.semibold)
-                                            .foregroundColor(.primary)
-                                            .lineLimit(2)
+                    ScrollView {
+                        LazyVStack(spacing: 12) {
+                            ForEach(bookVM.savedBooks) { book in
+                                NavigationLink(destination: BookDetailView(book: book).environmentObject(bookVM)) {
+                                    HStack(spacing: 14) {
+                                        // Book Icon
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .fill(Color(.systemGray6))
+                                            .frame(width: 56, height: 56)
+                                            .overlay(
+                                                Image(systemName: book.icon)
+                                                    .font(.title3)
+                                                    .foregroundColor(.black)
+                                            )
                                         
-                                        Text(book.author)
-                                            .font(.caption)
-                                            .foregroundColor(.gray)
+                                        // Book Info
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            Text(book.title)
+                                                .font(.subheadline)
+                                                .fontWeight(.semibold)
+                                                .foregroundColor(.primary)
+                                                .lineLimit(2)
+                                                .multilineTextAlignment(.leading)
+                                            
+                                            Text(book.author)
+                                                .font(.caption)
+                                                .foregroundColor(.gray)
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                        // Delete Button
+                                        Button(action: {
+                                            bookVM.removeSaved(for: book)
+                                        }) {
+                                            Image(systemName: "trash")
+                                                .font(.subheadline)
+                                                .foregroundColor(.red.opacity(0.7))
+                                                .padding(10)
+                                                .background(Color.red.opacity(0.1))
+                                                .cornerRadius(10)
+                                        }
+                                        .buttonStyle(.plain)
                                     }
-                                    
-                                    Spacer()
-                                    
-                                    // Delete Button
-                                    Button(action: {
-                                        bookVM.removeSaved(for: book)
-                                    }) {
-                                        Image(systemName: "trash")
-                                            .foregroundColor(.red.opacity(0.7))
-                                            .padding(8)
-                                            .background(Color.red.opacity(0.1))
-                                            .cornerRadius(8)
-                                    }
-                                    .buttonStyle(.plain)
+                                    .padding(14)
+                                    .background(Color(.systemGray6).opacity(0.5))
+                                    .cornerRadius(16)
                                 }
-                                .padding(.vertical, 4)
                             }
                         }
+                        .padding(.horizontal)
+                        .padding(.top, 8)
                     }
-                    .listStyle(.plain)
                 }
             }
             .navigationTitle("Saved")
