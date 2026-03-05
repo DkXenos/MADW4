@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 class BookViewModel: ObservableObject {
     @Published var books: [Book] = [
