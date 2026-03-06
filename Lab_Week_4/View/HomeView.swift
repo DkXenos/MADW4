@@ -60,33 +60,44 @@ struct HomeView: View {
                                 .foregroundColor(.gray)
                         }
                         
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 16) {
-                                ForEach(bookVM.savedBooks.prefix(5)) { book in
-                                    NavigationLink(destination: BookDetailView(book: book).environmentObject(bookVM)) {
-                                        VStack(alignment: .leading, spacing: 8) {
-                                            RoundedRectangle(cornerRadius: 12)
-                                                .fill(Color(.systemGray6))
-                                                .frame(width: 120, height: 160)
-                                                .overlay(
-                                                    Image(systemName: book.icon)
-                                                        .font(.system(size: 40))
-                                                        .foregroundColor(.black)
-                                                )
-                                            
+                        VStack(spacing: 12) {
+                            ForEach(bookVM.savedBooks.prefix(5)) { book in
+                                NavigationLink(destination: BookDetailView(book: book).environmentObject(bookVM)) {
+                                    HStack(spacing: 14) {
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .fill(Color(.systemGray6))
+                                            .frame(width: 60, height: 80)
+                                            .overlay(
+                                                Image(systemName: book.icon)
+                                                    .font(.system(size: 24))
+                                                    .foregroundColor(.black)
+                                            )
+                                        
+                                        VStack(alignment: .leading, spacing: 4) {
                                             Text(book.title)
-                                                .font(.caption)
+                                                .font(.subheadline)
                                                 .fontWeight(.semibold)
                                                 .foregroundColor(.primary)
-                                                .lineLimit(2)
-                                                .frame(width: 120, alignment: .leading)
+                                                .lineLimit(1)
                                             
                                             Text(book.author)
+                                                .font(.caption)
+                                                .foregroundColor(.gray)
+                                            
+                                            Text("\(book.pages) pages")
                                                 .font(.caption2)
                                                 .foregroundColor(.gray)
-                                                .frame(width: 120, alignment: .leading)
                                         }
+                                        
+                                        Spacer()
+                                        
+                                        Image(systemName: "chevron.right")
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
                                     }
+                                    .padding(12)
+                                    .background(Color(.systemGray6))
+                                    .cornerRadius(14)
                                 }
                             }
                         }

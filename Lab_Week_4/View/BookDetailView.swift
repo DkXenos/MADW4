@@ -29,7 +29,7 @@ struct BookDetailView: View {
                     .padding(.top, 30)
                 
                 Text(book.title)
-                    .font(.title2)
+                    .font(.system(size: 30))
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)

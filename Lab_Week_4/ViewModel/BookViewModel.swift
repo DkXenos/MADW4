@@ -53,7 +53,7 @@ class BookViewModel: ObservableObject {
             pages: 234
         )
     ]
-    
+
     @Published var searchText: String = ""
     
     var filteredBooks: [Book] {
