@@ -60,44 +60,44 @@ struct HomeView: View {
                                 .foregroundColor(.gray)
                         }
                         
-                        VStack(spacing: 12) {
-                            ForEach(bookVM.savedBooks.prefix(5)) { book in
-                                NavigationLink(destination: BookDetailView(book: book).environmentObject(bookVM)) {
-                                    HStack(spacing: 14) {
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .fill(Color(.systemGray6))
-                                            .frame(width: 60, height: 80)
-                                            .overlay(
-                                                Image(systemName: book.icon)
-                                                    .font(.system(size: 24))
-                                                    .foregroundColor(.black)
-                                            )
-                                        
-                                        VStack(alignment: .leading, spacing: 4) {
-                                            Text(book.title)
-                                                .font(.subheadline)
-                                                .fontWeight(.semibold)
-                                                .foregroundColor(.primary)
-                                                .lineLimit(1)
-                                            
-                                            Text(book.author)
-                                                .font(.caption)
-                                                .foregroundColor(.gray)
-                                            
-                                            Text("\(book.pages) pages")
-                                                .font(.caption2)
-                                                .foregroundColor(.gray)
+                        let saved = Array(bookVM.savedBooks.prefix(6))
+                        let rows = stride(from: 0, to: saved.count, by: 2).map {
+                            Array(saved[$0..<min($0 + 2, saved.count)])
+                        }
+                        
+                        VStack(spacing: 16) {
+                            ForEach(rows, id: \.first!.id) { pair in
+                                HStack(alignment: .top, spacing: 14) {
+                                    ForEach(pair) { book in
+                                        NavigationLink(destination: BookDetailView(book: book).environmentObject(bookVM)) {
+                                            VStack(alignment: .leading, spacing: 6) {
+                                                RoundedRectangle(cornerRadius: 12)
+                                                    .fill(Color(.systemGray6))
+                                                    .aspectRatio(0.9, contentMode: .fit)
+                                                    .overlay(
+                                                        Image(systemName: book.icon)
+                                                            .font(.system(size: 36))
+                                                            .foregroundColor(.black)
+                                                    )
+                                                
+                                                Text(book.title)
+                                                    .font(.subheadline)
+                                                    .fontWeight(.semibold)
+                                                    .foregroundColor(.primary)
+                                                    .lineLimit(2)
+                                                    .multilineTextAlignment(.leading)
+                                                
+                                                Text(book.author)
+                                                    .font(.caption)
+                                                    .foregroundColor(.gray)
+                                            }
+                                            .frame(maxWidth: .infinity, alignment: .leading)
                                         }
-                                        
-                                        Spacer()
-                                        
-                                        Image(systemName: "chevron.right")
-                                            .font(.caption)
-                                            .foregroundColor(.gray)
                                     }
-                                    .padding(12)
-                                    .background(Color(.systemGray6))
-                                    .cornerRadius(14)
+                                    if pair.count == 1 {
+                                        Spacer()
+                                            .frame(maxWidth: .infinity)
+                                    }
                                 }
                             }
                         }
@@ -114,7 +114,8 @@ struct HomeView: View {
                         .padding(.top, 8)
                     }
                 }
-                .padding()
+                .padding(.horizontal, 14)
+                .padding(.vertical)
             }
             .navigationBarHidden(true)
         }
